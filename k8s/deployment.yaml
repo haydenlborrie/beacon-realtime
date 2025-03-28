@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: socket-chat-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-chat-app
+  template:
+    metadata:
+      labels:
+        app: my-chat-app
+    spec:
+      containers:
+      - name: socket-chat-app
+        image: chat-app         # docker build -t chat-app . 
+        ports:
+        - containerPort: 3000
+        imagePullPolicy: Never  # Prevent Kubernetes from trying to pull the image from a registry
+
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: socketio-app
+# spec:
+#   selector:
+#     app: socketio
+#   ports:
+#     - protocol: TCP
+#       port: 80
+#       targetPort: 3000
+#   type: LoadBalancer
+
+# eval $(minikube docker-env)  # Switch to Minikube's Docker daemon
+# docker build -t chat-app . 
+# kubectl apply -f deployment.yaml
+# kubectl apply -f service.yaml
+# minikube tunnel
+# kubectl get service
+
+# fluxcd
+# kubectl config use-context minikube
+# curl -s https://fluxcd.io/install.sh | sudo bash
+
+# flux bootstrap github \
+#   --owner=YOUR_GITHUB_USERNAME \
+#   --repository=YOUR_FLUX_REPO \
+#   --branch=main \
+#   --path=clusters/minikube \
+#   --personal
