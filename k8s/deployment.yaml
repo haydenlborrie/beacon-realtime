@@ -14,10 +14,10 @@ spec:
     spec:
       containers:
       - name: socket-chat-app
-        image: chat-app         # docker build -t chat-app . 
+        image: chat-app:latest         # docker build -t chat-app . 
         ports:
         - containerPort: 3000
-        imagePullPolicy: Never  # Prevent Kubernetes from trying to pull the image from a registry
+        imagePullPolicy: Always  # Prevent Kubernetes from trying to pull the image from a registry
 
 # apiVersion: v1
 # kind: Service
