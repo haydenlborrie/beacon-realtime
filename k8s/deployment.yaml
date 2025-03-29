@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: socket-chat-app
-        image: chat-app:latest         # docker build -t chat-app . 
+        image: ghcr.io/haydenlborrie/beacon-realtime:latest 
         ports:
         - containerPort: 3000
         imagePullPolicy: Always  # Prevent Kubernetes from trying to pull the image from a registry
